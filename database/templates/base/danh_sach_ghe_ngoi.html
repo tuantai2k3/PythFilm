@@ -1,0 +1,32 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    {% load static %}
+    <h2>Danh sách ghế ngồi</h2>
+    <table class="table-management">
+        <thead>
+            <tr>
+                <th>Tên ghế</th>
+                <th>Rạp chiếu</th>
+                <th>Loại ghế</th>
+                <th>Giá vé</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ghe in ds_ghe %}
+            <tr>
+                <td>{{ ghe.ten_ghe }}</td>
+                <td>{{ ghe.rap_chieu.ten_rap }}</td>
+                <td>{{ ghe.loai_ghe }}</td>
+                <td>{{ ghe.gia_ve }}</td>
+                <td>
+                    <a href="{% url 'sua_ghe_ngoi' ghe.id %}">Sửa</a> |
+                    <a href="{% url 'xoa_ghe_ngoi' ghe.id %}">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'them_ghe_ngoi' %}">Thêm ghế ngồi mới</a>
+{% endblock %}

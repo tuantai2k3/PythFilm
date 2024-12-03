@@ -1,0 +1,259 @@
+{% load static %}
+{% include "base/header.html" %}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đoán Tên Phim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Các style CSS giữ nguyên như cũ -->
+    <style>
+        /* Thêm style cho nút bonus */
+        .bonus-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .bonus-btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .bonus-btn i {
+            margin-right: 8px;
+        }
+
+        .play-again-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #666;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .play-again-btn:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+
+        #adTimer {
+            font-size: 18px;
+            color: #fbbf24;
+            margin: 15px 0;
+        }
+
+        /* Style cho nút trong modal */
+        .modal-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            border: none;
+        }
+
+        .modal-btn.watch {
+            background: #4caf50;
+            color: white;
+        }
+
+        .modal-btn.close {
+            background: #666;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Đoán Tên Phim</h1>
+
+        <div class="stats">
+            <p class="remaining-guesses">Lượt đoán còn lại: {{ remaining_guesses }}/5</p>
+            <p class="score">Điểm hiện tại: {{ game.score }}</p>
+        </div>
+
+        {% if movie_part %}
+            <img src="{{ movie_part }}" alt="Phần phim cần đoán">
+        {% endif %}
+
+        {% if phim and remaining_guesses > 0 %}
+            <form method="POST" action="{% url 'guess_movie' phim.id %}">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <input type="text" name="guess" placeholder="Nhập tên phim..." required>
+                    <button type="submit">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        {% endif %}
+
+        {% if messages %}
+            {% for message in messages %}
+                <p class="result-message {% if 'success' in message.tags %}correct{% else %}incorrect{% endif %}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+        {% if remaining_guesses <= 0 %}
+            <div class="game-over">
+                <h2>Game Over!</h2>
+                <p>Bạn đã hết lượt đoán. Tổng điểm: {{ game.score }}</p>
+                
+                {% if game.ad_view_available and not game.ad_bonus_used %}
+                    <button onclick="showAdModal()" class="bonus-btn">
+                        <i class="fas fa-play-circle"></i> Xem quảng cáo nhận thêm lượt
+                    </button>
+                {% endif %}
+                
+                <a href="{% url 'game_page' %}" class="play-again-btn">
+                    <i class="fas fa-redo"></i> Chơi lại
+                </a>
+            </div>
+        {% endif %}
+    </div>
+<!-- Modal quảng cáo -->
+<div id="adModal" class="ad-modal">
+    <div class="ad-modal-content">
+        <h3>Xem Trailer Để Nhận Thêm Lượt</h3>
+        <p>Xem trailer phim trong 30 giây để nhận thêm 1 lượt chơi!</p>
+        
+        <!-- Thêm phần video -->
+        <div id="videoContainer" style="display: none; margin: 20px 0;">
+            <iframe id="adVideo" 
+                width="100%" 
+                height="315"
+                src="https://www.youtube.com/embed/__2bjWbetsA?enablejsapi=1&controls=0&autoplay=0" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+
+        <div id="adTimer" style="display: none;">
+            Thời gian còn lại: <span id="countdown">30</span>s
+        </div>
+
+        <button id="watchAdBtn" class="ad-watch-btn">
+            <i class="fas fa-play-circle"></i> Bắt đầu xem
+        </button>
+        <button class="ad-close-btn" onclick="closeAdModal()">Đóng</button>
+    </div>
+</div>
+
+<!-- Update Script -->
+<!-- Thêm YouTube API -->
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+    let player;
+    let countdownInterval;
+    
+    function onYouTubeIframeAPIReady() {
+        player = new YT.Player('adVideo', {
+            events: {
+                'onStateChange': onPlayerStateChange,
+                'onReady': onPlayerReady
+            }
+        });
+    }
+    
+    function onPlayerReady(event) {
+        // Video sẵn sàng để phát
+        event.target.setPlaybackQuality('hd720');
+    }
+    
+    function showAdModal() {
+        document.getElementById('adModal').style.display = 'block';
+        document.getElementById('videoContainer').style.display = 'none';
+        document.getElementById('adTimer').style.display = 'none';
+    }
+    
+    function closeAdModal() {
+        document.getElementById('adModal').style.display = 'none';
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        if (player) {
+            player.stopVideo();
+        }
+        document.getElementById('videoContainer').style.display = 'none';
+        document.getElementById('adTimer').style.display = 'none';
+        document.getElementById('watchAdBtn').disabled = false;
+        document.getElementById('watchAdBtn').innerHTML = '<i class="fas fa-play-circle"></i> Bắt đầu xem';
+    }
+    
+    function onPlayerStateChange(event) {
+        if (event.data == YT.PlayerState.PAUSED && countdownInterval) {
+            alert('Vui lòng xem hết video để nhận thưởng!');
+            player.playVideo();
+        }
+        // Khi video kết thúc
+        if (event.data == YT.PlayerState.ENDED) {
+            clearInterval(countdownInterval);
+            submitReward();
+        }
+    }
+    
+    function submitReward() {
+        fetch('{% url "claim_free_guess" %}', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.status === 'success') {
+                alert('Chúc mừng! Bạn đã nhận thêm 1 lượt chơi.');
+                location.reload();
+            } else {
+                alert('Có lỗi: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+        });
+    }
+    
+    document.getElementById('watchAdBtn').addEventListener('click', function() {
+        const button = this;
+        const timerDiv = document.getElementById('adTimer');
+        const videoContainer = document.getElementById('videoContainer');
+        const countdownSpan = document.getElementById('countdown');
+        let timeLeft = 30;
+    
+        button.disabled = true;
+        videoContainer.style.display = 'block';
+        timerDiv.style.display = 'block';
+        
+        player.playVideo();
+        
+        countdownInterval = setInterval(() => {
+            timeLeft--;
+            countdownSpan.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval);
+                submitReward();
+            }
+        }, 1000);
+    });
+</script>

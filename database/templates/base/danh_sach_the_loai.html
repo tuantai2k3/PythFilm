@@ -1,0 +1,23 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách thể loại</h2>
+<table class="table-management">
+    <tr>
+        <th>Tên thể loại</th>
+        <th>Hành động</th>
+    </tr>
+    {% for the_loai in ds_the_loai %}
+    <tr>
+        <td>{{ the_loai.ten_the_loai }}</td>
+        <td>
+            <a href="{% url 'sua_the_loai' the_loai.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_the_loai' the_loai.id %}">Xóa</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_the_loai' %}">Thêm thể loại mới</a>
+{% endblock %}

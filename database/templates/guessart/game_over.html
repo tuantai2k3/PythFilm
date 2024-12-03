@@ -1,0 +1,302 @@
+{% load static %}
+{% include "base/header.html" %}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đoán Tên Phim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            color: white;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            padding: 20px 0;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 40px;
+            background: linear-gradient(145deg, #1e1e1e, #121212); /* Tạo hiệu ứng chuyển màu mượt mà */
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); /* Thêm bóng mờ cho phần tử */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .game-container:hover {
+            transform: translateY(-5px); /* Tạo hiệu ứng nhấc lên khi hover */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8); /* Tăng cường hiệu ứng bóng mờ khi hover */
+        }
+        
+        .stats {
+            background-color: rgba(255, 255, 255, 0.1); /* Nền mờ cho thông tin điểm */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 20px;
+            color: #bdbdbd;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Bóng mờ cho văn bản */
+        }
+        
+        .stats p {
+            margin: 10px 0;
+        }
+        
+        img {
+            display: block;
+            margin: 20px auto;
+            border: 3px solid #444;
+            padding: 5px;
+            height: auto;
+            max-width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        img:hover {
+            transform: scale(1.05); /* Tạo hiệu ứng zoom cho ảnh khi hover */
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        input {
+            padding: 12px;
+            font-size: 18px;
+            width: 350px;
+            border: 2px solid #444;
+            border-radius: 6px;
+            color: #121212;
+            background-color: #333;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus {
+            border-color: #fbbf24; /* Hiệu ứng thay đổi màu viền khi focus */
+            outline: none;
+        }
+        
+        button {
+            background-color: #444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            margin: 20px auto;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        button i {
+            font-size: 28px;
+        }
+        
+        button:hover {
+            background-color: #fbbf24;
+            transform: scale(1.1);
+        }
+        
+        .result-message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .correct {
+            color: #4caf50;
+        }
+        
+        .incorrect {
+            color: #f44336;
+        }
+        
+        .remaining-guesses, .score {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .game-over {
+            margin-top: 30px;
+        }
+        
+        .game-over h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f44336;
+            margin-bottom: 15px;
+        }
+        
+        .game-over p {
+            font-size: 20px;
+            color: #fbbf24;
+        }
+        
+        .game-over-link {
+            color: #4caf50;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 15px;
+            display: inline-block;
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #333;
+            transition: background-color 0.3s ease;
+        }
+        
+        .game-over-link:hover {
+            background-color: #4caf50;
+            color: #121212;
+        }
+        
+        .flex {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .button {
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            opacity: 0.8;
+        }
+        
+        .bg-yellow-600 {
+            background-color: #fbbf24;
+            color: white;
+        }
+        
+        .bg-blue-600 {
+            background-color: #2563eb;
+            color: white;
+        }
+        
+        .bg-green-600 {
+            background-color: #10b981;
+            color: white;
+        }
+        
+        .bg-yellow-600:hover {
+            background-color: #d97706;
+        }
+        
+        .bg-blue-600:hover {
+            background-color: #1d4ed8;
+        }
+        
+        .bg-green-600:hover {
+            background-color: #065f46;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .game-container {
+                padding: 20px;
+                margin: 20px;
+            }
+        
+            input {
+                width: 80%;
+            }
+        
+            button {
+                width: 50px;
+                height: 50px;
+            }
+        
+            .game-over-link {
+                padding: 8px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Đoán Tên Phim</h1>
+
+        <div class="stats">
+            <p class="score">Điểm hiện tại: {{ game.score }}</p>
+        </div>
+
+        <!-- Phần ảnh phim -->
+        {% if movie_part %}
+            <img src="{{ movie_part }}" alt="Phần phim cần đoán">
+        {% endif %}
+
+        <!-- Form đoán phim -->
+        {% if phim and remaining_guesses > 0 %}
+            <form method="POST" action="{% url 'guess_movie' phim.id %}">
+                {% csrf_token %}
+                <div style="margin-bottom: 20px;">
+                    <input type="text" name="guess" placeholder="Nhập tên phim..." required>
+                    <button type="submit">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        {% endif %}
+
+        <!-- Thông báo kết quả -->
+        {% if messages %}
+            {% for message in messages %}
+                <p class="result-message {% if 'success' in message.tags %}correct{% else %}incorrect{% endif %}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Game Over -->
+        {% if remaining_guesses <= 0 %}
+            <div class="game-over">
+                <h2>Game Over!</h2>
+                <p class="game-over-message">Bạn đã hết lượt đoán. Tổng điểm: {{ player.score }}</p>
+                <a href="{% url 'game_page' %}" class="game-over-link">Chơi lại</a>
+            </div>
+        {% endif %}
+
+        <!-- Nút điều hướng -->
+        <div class="flex">
+            {% if player.score >= 10 %}
+            <a href="{% url 'reward_page' %}" class="button bg-yellow-600">
+                Nhận thưởng
+            </a>
+            {% endif %}
+            
+            <a href="{% url 'game_page' %}" class="button bg-blue-600">
+                Chơi lại
+            </a>
+            
+            <a href="{% url 'game_results' %}" class="button bg-green-600">
+                Xem lịch sử
+            </a>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% include "base/footer.html" %}

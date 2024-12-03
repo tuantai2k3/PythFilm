@@ -1,0 +1,21 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    <h2>Danh sách định dạng phim</h2>
+    <table class="table-management">
+        <tr>
+            <th>Tên định dạng</th>
+            <th>Hành động</th>
+        </tr>
+        {% for dinh_dang in ds_dinh_dang_phim %}
+        <tr>
+            <td>{{ dinh_dang.ten_dinh_dang }}</td>
+            <td>
+                <a href="{% url 'sua_dinh_dang_phim' dinh_dang.id %}">Sửa</a> | 
+                <a href="{% url 'xoa_dinh_dang_phim' dinh_dang.id %}">Xóa</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{% url 'them_dinh_dang_phim' %}">Thêm định dạng phim mới</a>
+{% endblock %}

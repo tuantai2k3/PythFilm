@@ -1,0 +1,32 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách vé</h2>
+<table class="table-management">
+    <tr>
+        <th>Phim</th>
+        <th>Thời gian chiếu</th>
+        <th>Rạp</th>
+        <th>Ghế ngồi</th>
+        <th>Loại ghế</th>
+        <th>Giá vé</th>
+        <th>Hành động</th>
+    </tr>
+    {% for ve in ds_ve %}
+    <tr>
+        <td>{{ ve.phim.ten_phim }}</td>
+        <td>{{ ve.thoi_gian_chieu.thoi_gian_chieu }}</td>
+        <td>{{ ve.rap.ten_rap }}</td>
+        <td>{{ ve.ghe_ngoi.ten_ghe }}</td>
+        <td>{{ ve.loai_ghe }}</td>
+        <td>{{ ve.gia_ve }}</td>
+        <td>
+            <a href="{% url 'sua_ve' ve.id %}">Sửa</a> |
+            <a href="{% url 'xoa_ve' ve.id %}">Xóa</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_ve' %}">Thêm vé mới</a>
+{% endblock %}

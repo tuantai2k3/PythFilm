@@ -1,0 +1,224 @@
+<html lang="en">
+{% load static %}
+<!-- Mirrored from starlight.vn/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Nov 2024 01:17:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <!-- Site information -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='revisit-after' content='7 days'/><title>Rạp phim PythFilm</title><meta itemprop='name' content='Rạp phim PythFilm'><meta property='og:title' content='Rạp phim Starlight' /> <meta name='twitter:title' content ='Rạp phim Starlight'/><meta name='twitter:card' content ='summary'/><meta name='description' content ='Rạp phim Starlight'/><meta name='twitter:description' content ='Rạp phim Starlight'/><meta itemprop='description' content='Rạp phim Starlight' /><meta property='og:description' content='Rạp phim Starlight' /> <meta property='og:locale' content='vi_VN' /><link rel='alternate' hreflang='vi_VN' href='index.html'><meta property='og:type' content='website' /><meta name='keywords' content='Rạp phim Starlight'/><meta property='og:site_name' content='StarLightSITE' /><meta name='twitter:site' content ='StarLightSITE'/><meta name='robots' content='index,follow'/><meta property='fb:admins' content='' />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:thin,extra-light,light,bold,100,200,300,400,500,600,700,800" rel="stylesheet">
+    <!-- External CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'Content/Style.css' %}">
+    <link rel="stylesheet" href="{% static 'seat/Content/Stylebf25.css' %}">
+    <link rel='stylesheet' type='text/css' media='screen' href="{% static 'styles/style.css' %}" />
+    <style>
+        .amy-movie-field-desc {
+            /* Giới hạn chiều cao tối đa của phần tóm tắt */
+            max-height: 150px;  /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
+            overflow: hidden;  /* Ẩn phần nội dung vượt quá chiều cao */
+            text-overflow: ellipsis;  /* Thêm dấu ba chấm khi nội dung bị cắt */
+            display: -webkit-box; /* Đảm bảo nội dung không tràn */
+            -webkit-line-clamp: 5; /* Giới hạn số dòng tối đa */
+            -webkit-box-orient: vertical; /* Đảm bảo phần tử hiển thị theo chiều dọc */
+            word-wrap: break-word;  /* Ngắt từ dài khi cần thiết */
+        }
+        
+        .amy-movie-field-desc p {
+            color: #333;  /* Màu chữ */
+            margin: 0;  /* Loại bỏ margin mặc định */
+            padding: 0;  /* Loại bỏ padding mặc định */
+        }
+
+        .user-info {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .user-info a {
+            display: block;
+            color: #000;
+            text-transform: capitalize;
+            padding: 10px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .logout-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: left;
+            min-width: 130px;
+            z-index: 10;
+        }
+        
+        .logout-menu li {
+            border-top: 1px solid #ddd;
+        }
+        
+        .logout-menu li a {
+            padding: 10px 15px;
+            display: block;
+            color: #13212d;
+            text-decoration: none;
+        }
+        
+        .logout-menu li a:hover {
+            background-color: #f37a3b;
+            color: #fff;
+        }
+        
+        .user-info:hover .logout-menu {
+            display: block;
+        }
+        
+        .user-info .dropdown-arrow {
+            font-size: 14px;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+        
+        
+    </style>
+
+    <!-- Google Fonts -->
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.ico">
+    <script src="../cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+        var OneSignal = window.OneSignal || [];
+        OneSignal.push(function () {
+            OneSignal.init({
+                appId: "d17589a4-68d3-451d-98d8-ffef22409a32",
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div style="display:none" class="main-reloader">
+        <div class="loader"></div>
+    </div>
+    <!-- Preloader End -->
+    <!-- Main Header -->
+    
+<header class="filmoja-header-area">
+
+    <!-- Header Top Area Start -->
+    <div class="header-top-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-3 col-sm-12">
+                    <div class="header-top-social">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-9 col-sm-12">
+                    <div class="header-top-menu">
+                        <ul>
+                            
+                            <li><a href="cau-hoi-thuong-gap.html">FAQ's</a></li>
+                            
+                            
+        {% if user.is_authenticated %}
+            <!-- Tên người dùng và nút đăng xuất -->
+            <li class="user-info">
+                <a href="#" class="user-name">{{ user.username }} <span class="dropdown-arrow">&#9660;</span></a>
+                <ul class="logout-menu">
+                    <li><a href="{% url 'profile' %}" style="color:#000;">Thông tin </a></li>
+                    <li><a href="{% url 'logout' %}" style="color:#000;">Đăng xuất</a></li>
+                </ul>
+            </li>
+        {% else %}
+            <!-- Hiển thị link đăng nhập và đăng ký nếu người dùng chưa đăng nhập -->
+            <li><a href="{% url 'login' %}" class="btn-member">Đăng nhập</a></li>
+            <li><a href="{% url 'register' %}" class="btn-member">Đăng ký</a></li>
+        {% endif %}
+
+
+<script>
+    function logOut() {
+        $.ajax({
+            url: "/MemberRegister/Logout",
+            type: "POST",
+            traditional: true,
+            datatype: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                //alert(result);
+                if (result === "true" || result === true) {
+                    location.href = "index.html";
+                } else {
+                }
+            },
+            error: function () {
+                return false;
+            }
+        });
+    }
+</script>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header Top Area End -->
+{% load static %}
+    <!-- Main Header Area Start -->
+    <div class="main-header-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="site-logo">
+                        <a href="index.html">
+                            <img src="{% static 'trangchu/Content/img/logo.png' %}" alt="filmoja" />
+                        </a>
+                    </div>
+                    <!-- Responsive Menu Start -->
+                    <div class="filmoja-responsive-menu"></div>
+                    <!-- Responsive Menu End -->
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="mainmenu">
+                        <nav>
+                            <ul id="responsive_navigation">
+                                <!-- Mobile Search Start -->
+                                <!-- Mobile Search End -->
+                                <li><a href="{% url 'index' %}">Trang chủ</a></li>
+                                <li>
+                                    <a href="lich-chieu.html">Lịch chiếu</a>
+                                </li>
+                                <li><a href="packets.html">Mua Gói</a></li>
+                                <li>
+                                    <a href="#">Phim</a>
+                                    <ul>
+                                        <li><a href="phim.html">Phim Đang Chiếu</a></li>
+                                        <li><a href="phim-sap-chieu.html">Phim Sắp Chiếu</a></li>
+
+                                    </ul>
+                                </li>
+                                <li><a href="uu-dai.html">Khuyến Mãi</a></li>
+                                <li><a href="{% url 'game_page' %}">Minigame</a></li>
+                                <li><a href="{% url 'contact' %}">Liên hệ</a></li>
+                               
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Header Area End -->
+
+</header>

@@ -1,0 +1,6 @@
+<!-- xuat_chieu_form.html -->
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Tạo Xuất Chiếu</button>
+</form>

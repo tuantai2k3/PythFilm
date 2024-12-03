@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Success</title>
+</head>
+<body>
+    <h2>Thành Công!</h2>
+    <p>Vé của bạn đã được tạo thành công!</p>
+    <p>Thông tin vé:</p>
+    <ul>
+        <li>Phim: {{ ve.phim.ten_phim }}</li>
+        <li>Suất chiếu: {{ ve.thoi_gian_chieu }}</li>
+        <li>Số ghế: 
+            {% for ghe in ve.ghe_ngoi.all %}
+                {{ ghe.ten_ghe }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+        <li>Combo: 
+            {% for combo in ve.combo.all %}
+                {{ combo.ten_combo }} ({{ combo.gia_combo }} đ){% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </li>
+        <li>
+            <h3>Mã QR:</h3>
+            <img src="data:image/png;base64,{{ qr_code_data }}" alt="QR Code">
+        </li>
+    </ul>
+</body>
+</html>

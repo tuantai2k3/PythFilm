@@ -1,0 +1,33 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách xuất chiếu</h2>
+<table class="table-management">
+    <tr>
+        <th>Phim</th>
+        <th>Thời gian chiếu</th>
+        <th>Rạp chiếu</th>
+        <th>Định dạng phim</th>
+        <th>Hành động</th>
+    </tr>
+    {% for xuat_chieu in ds_xuat_chieu %}
+    <tr>
+        <td>{{ xuat_chieu.phim.ten_phim }}</td>
+        <td>{{ xuat_chieu.thoi_gian_chieu }}</td>
+        <td>{{ xuat_chieu.rap_chieu }}</td>
+        <td>{{ xuat_chieu.dinh_dang_phim.ten_dinh_dang }}</td>
+        <td>
+            <a href="{% url 'sua_xuat_chieu' xuat_chieu.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_xuat_chieu' xuat_chieu.id %}">Xóa</a>
+
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_xuat_chieu' %}">Thêm xuất chiếu mới</a>
+            <!-- Ví dụ thêm link vào trang chính hoặc menu -->
+<a href="{% url 'tao_xuat_chieu' %}">Tạo suất chiếu tự động</a>
+{% endblock %}

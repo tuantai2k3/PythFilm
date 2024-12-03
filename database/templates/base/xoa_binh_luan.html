@@ -1,0 +1,12 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    <h1 class="mb-4">Xóa Bình Luận</h1>
+    <p>Bạn có chắc chắn muốn xóa bình luận của "<strong>{{ binh_luan.user_binh_luan.username }}</strong>" về phim "<strong>{{ binh_luan.phim.ten_phim }}</strong>"?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Xóa</button>
+        <a href="{% url 'danh_sach_binh_luan' %}" class="btn btn-secondary">Hủy</a>
+    </form>
+{% endblock %}

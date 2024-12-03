@@ -1,0 +1,77 @@
+{% include "base/header.html" %}
+{% load static %}
+{% block content %}
+<html lang="en">
+<head>
+    <!-- Meta tags và các liên kết khác -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rạp phim Starlight</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <style>
+        body { background-color: rgb(0, 0, 0); }
+    </style>
+</head>
+
+<body>
+    <header>
+        <!-- Header content như logo và menu -->
+    </header>
+
+    <main class="profile-page layout layout--3">
+        <div class="container">
+            <nav class="header__menu">
+
+                <!-- Dropdown Menu -->
+                {% if user.is_authenticated %}
+                <div class="header__user">
+                    <a href="#" class="btn-member">
+                        <span>{{ user.username }}</span>
+                        <p>Profile</p>
+                    </a>
+                    <button class="dropdown-button">
+                        <!-- Icon for dropdown -->
+                    </button>
+                </div>
+                {% else %}
+                    <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+                
+                <div class="dropdown-menu">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'update-user' %}" class="dropdown-link">Edit Profile</a>
+                        <a href="{% url 'logout' %}" class="dropdown-link">Logout</a>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+
+        <div class="profile">
+            <div class="profile__info">
+                <h3>{{ user.username }}</h3>
+                {% if user.is_superuser %}
+                    <p style="color: rgb(215, 0, 0);">Administrator</p>
+                {% elif user.moderator %}
+                    <p style="color: rgb(0, 216, 205);">Moderator</p>
+                {% else %}
+                    <p>User</p>
+                {% endif %}
+                {% if request.user == user %}
+                    <a href="{% url 'update-user' %}" class="btn btn--main btn--pill">Edit Profile</a>
+                {% endif %}
+                {% if request.user == user %}
+                    <a href="{% url 'password' %}" class="btn btn--main btn--pill">Edit Password</a>
+                {% endif %}
+            </div>
+
+            <div class="profile__about">
+                <h3>About</h3>
+                <p>{{ user.bio }}</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+{% endblock content %}

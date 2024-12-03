@@ -1,0 +1,27 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách phim</h2>
+<table class="table-management">
+    <tr>
+        <th>Tên phim</th>
+        <th>Đạo diễn</th>
+        <th>Thời lượng (phút)</th>
+        <th>Hành động</th>
+    </tr>
+    {% for phim in ds_phim %}
+    <tr>
+        <td>{{ phim.ten_phim }}</td>
+        <td>{{ phim.dao_dien }}</td>
+        <td>{{ phim.thoi_luong }}</td>
+        <td>
+            <a href="{% url 'sua_phim' phim.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_phim' phim.id %}">Xóa</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_phim' %}">Thêm phim mới</a>
+{% endblock %}

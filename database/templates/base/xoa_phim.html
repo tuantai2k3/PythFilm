@@ -1,0 +1,18 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+
+<h2>Xóa phim: {{ phim.ten_phim }}</h2>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <p>Bạn có chắc chắn muốn xóa phim này?</p>
+    
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    
+    <a href="{% url 'danh_sach_phim' %}" class="btn btn-secondary">Quay lại danh sách phim</a>
+</form>
+
+{% endblock %}

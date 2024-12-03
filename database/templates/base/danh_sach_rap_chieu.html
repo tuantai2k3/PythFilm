@@ -1,0 +1,29 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách rạp chiếu</h2>
+<table class="table-management">
+    <tr>
+        <th>Tên rạp</th>
+        <th>Địa chỉ</th>
+        <th>Số điện thoại</th>
+        <th>Email</th>
+        <th>Hành động</th>
+    </tr>
+    {% for rap_chieu in ds_rap_chieu %}
+    <tr>
+        <td>{{ rap_chieu.ten_rap }}</td>
+        <td>{{ rap_chieu.dia_chi }}</td>
+        <td>{{ rap_chieu.so_dien_thoai }}</td>
+        <td>{{ rap_chieu.email }}</td>
+        <td>
+            <a href="{% url 'sua_rap_chieu' rap_chieu.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_rap_chieu' rap_chieu.id %}">Xóa</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_rap_chieu' %}">Thêm rạp chiếu mới</a>
+{% endblock %}

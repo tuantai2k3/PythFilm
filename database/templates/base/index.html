@@ -1,0 +1,522 @@
+{% include "base/header.html" %}
+{% load static %}
+<script>
+    function openNav() {
+        document.getElementById("mobileMenu").style.width = "300px";
+    }
+
+    function closeNav() {
+        document.getElementById("mobileMenu").style.width = "0";
+    }
+</script>
+
+    <!-- Main Header End -->
+    
+    <!-- Slider Area Start -->
+    <section class="filmoja-slider-area fix">
+        <div class="filmoja-slide owl-carousel">
+            <a href="film/venom-keo-cuoi-t13/cb482ec0-c308-49d7-93b4-e749c8d10032.html">
+                <div class="filmoja-main-slide">
+                    <img src="{% static 'trangchu/Areas/Admin/Content/Fileuploads/images/Slide2024/Venomm.jpg' %}" style="max-height:550px" />
+                </div>
+            </a>
+            <a href="film/ngay-xua-co-mot-chuyen-tinh-t16/5fd89edf-f75e-4c4a-bb6d-8ae4adc1d51b.html">
+                <div class="filmoja-main-slide">
+                    <img src="{% static 'trangchu/Areas/Admin/Content/Fileuploads/images/Slide2024/ngay-x%c6%b0a-co-mot-chuyen-tinh.jpg' %}" style="max-height:550px" />
+                </div>
+            </a>
+            <a href="film/co-dau-hao-mon-t18/24c23224-1add-4095-adaf-e08a1da4b688.html">
+                <div class="filmoja-main-slide">
+                    <img src="{% static 'trangchu/Areas/Admin/Content/Fileuploads/images/Slide2024/co-dau-hao-mon.jpg' %}" style="max-height:550px" />
+                </div>
+            </a>
+            <a href="film/tee-yod-quy-an-tang-2/affb4e69-46d6-4d60-ad36-16202fac6455.html">
+                <div class="filmoja-main-slide">
+                    <img src="{% static 'trangchu/Areas/Admin/Content/Fileuploads/images/Slide2024/quy-%c4%83n-tang.jpg' %}" style="max-height:550px" />
+                </div>
+            </a>
+            <div class="filmoja-main-slide">
+                <img src="{% static 'trangchu/Areas/Admin/Content/Fileuploads/images/Slide2024/z5989293104698_ef0a6cb4fc383e0ba2719ba271b314d4.jpg' %}" style="max-height:550px" />
+            </div>
+        </div>
+    </section>
+    
+
+<!-- Slider Area End -->
+
+<!-- Slider Area End -->
+<div class="booking-form" style="">
+    <div class="col-lg-12">
+        <div class="booking-form-item" style="width:20%;">
+            <div class="select-box slTheater">
+                <div class="select-box__current uServer" tabindex="1">
+                    <div class="select-box__value">
+                        <input class="select-box__input" type="radio" id="s0" value="0" name="inputServer" checked="checked">
+                        <p class="select-box__input-text">Rạp</p>
+                    </div>
+                    <img class="select-box__icon" src="{% static 'trangchu/Content/img/black-ar-down.png' %}" alt="Arrow Icon" aria-hidden="true">
+                </div>
+                <ul class="select-box__list">
+                    <li>
+                        <label class="select-box__option" data-value="0" style="background-color: #36373b; color: #fff;" onclick="selectServer(this)" for="s0" aria-hidden="aria-hidden">Rạp</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="booking-form-item" style="width:20%;">
+            <div class="select-box slFilm">
+                <div class="select-box__current uFilm" tabindex="1">
+                    <div class="select-box__value">
+                        <input class="select-box__input" type="radio" id="0" value="0" name="inputFilm" checked="checked">
+                        <p class="select-box__input-text">Phim</p>
+                    </div>
+                    <img class="select-box__icon" src="{% static 'trangchu/Content/img/black-ar-down.png' %}" alt="Arrow Icon" aria-hidden="true">
+                </div>
+                <ul class="select-box__list">
+                    <li>
+                        <label class="select-box__option" data-value="0" for="0" aria-hidden="aria-hidden">Phim</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="booking-form-item" style="width:20%;">
+            <div class="select-box slDate">
+                <div class="select-box__current uDate" tabindex="1">
+                    <div class="select-box__value">
+                        <input class="select-box__input" type="radio" id="0" value="0" name="inputDate" checked="checked">
+                        <p class="select-box__input-text">Ngày xem</p>
+                    </div>
+                    <img class="select-box__icon" src="{% static 'trangchu/Content/img/black-ar-down.png' %}" alt="Arrow Icon" aria-hidden="true">
+                </div>
+                <ul class="select-box__list">
+                    <li>
+                        <label class="select-box__option" data-value="0" for="0" aria-hidden="aria-hidden">Ngày xem</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="booking-form-item" style="width:20%;">
+            <div class="select-box slTime">
+                <div class="select-box__current uTime" tabindex="1">
+                    <div class="select-box__value">
+                        <input class="select-box__input" type="radio" id="0" value="0" name="inputTime" checked="checked">
+                        <p class="select-box__input-text">Suất chiếu</p>
+                    </div>
+                    <img class="select-box__icon" src="{% static 'trangchu/Content/img/black-ar-down.png' %}" alt="Arrow Icon" aria-hidden="true">
+                </div>
+                <ul class="select-box__list">
+                    <li>
+                        <label class="select-box__option" data-value="0" for="0" aria-hidden="aria-hidden">Suất chiếu</label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Top Movies Area Start -->
+<section class="filmoja-top-movies-area section_30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filmoja-heading">
+                    <h2>Phim:<span> Đang chiếu</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="amy-movie-carousel-2">
+                    <div class="amy-movie-list">
+                        <div class="amy-movie-items">
+                            {% for phim in top_movies %}
+                            <div class="amy-movie-item">
+                                <div class="amy-movie-item-inner">
+                                    <div class="amy-movie-item-front">
+                                        <div class="slick-arrows"></div>
+                                        <div class="amy-movie-item-poster">
+                                            <!-- Đường dẫn đến trang chi tiết của phim -->
+                                            <a href="{% url 'film_detail' phim.id %}">
+                                                <!-- Hiển thị ảnh thumbnail -->
+                                                <img width="258" height="387" src="{{ phim.thumbnail.url }}" class="attachment-258x444 size-258x444" alt="{{ phim.ten_phim }}" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="amy-movie-item-back">
+                                        <div class="amy-movie-item-back-inner">
+                                            <div class="amy-movie-item-content">
+                                                <!-- Độ tuổi phim -->
+                                                <span class="amy-movie-field-imdb">T{{ phim.do_tuoi }}</span>
+                                                <!-- Tên phim và độ tuổi -->
+                                                <h3 class="amy-movie-field-title">
+                                                    <a href="{% url 'film_detail' phim.id %}">{{ phim.ten_phim }} (T{{ phim.do_tuoi }})</a>
+                                                </h3>
+                                                <div class="amy-movie-item-meta">
+                                                    <!-- Thể loại phim -->
+                                                    <span class="amy-movie-field-mpaa">2D</span>
+                                                    <!-- Thời lượng phim -->
+                                                    <span class="amy-movie-field-duration">
+                                                        <i class="fa fa-clock-o"></i> {{ phim.thoi_luong }} phút
+                                                    </span>
+                                                </div>
+                                                <div class="amy-movie-custom-field-group amy-movie-field-language">
+                                                    <div class="amy-movie-custom-field-content">
+                                                        {{ phim.the_loai.all|join:", " }}
+                                                    </div>
+                                                </div>
+                                                <div class="amy-movie-custom-field-group amy-movie-field-language">
+                                                    <label class="amy-movie-custom-field-label">Đạo diễn:</label>
+                                                    <div class="amy-movie-custom-field-content">
+                                                        {{ phim.dao_dien }}
+                                                    </div>
+                                                </div>
+                                                <div class="amy-movie-custom-field-group amy-movie-field-release_date">
+                                                    <label class="amy-movie-custom-field-label">Diễn viên:</label>
+                                                    <div class="amy-movie-custom-field-content">
+                                                        {{ phim.dien_vien }}
+                                                    </div>
+                                                </div>
+                                                <div class="amy-movie-field-desc">
+                                                    <p style="color:#333">{{ phim.tom_tat }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="amy-movie-item-button">
+                                                <a href="{% url 'film_detail' phim.id %}" class="amy-btn-icon-text link-detail fancybox.iframe amy-fancybox">
+                                                    <i class="fa fa-ticket"></i>Đặt vé
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Top Movies Area End -->
+<!-- Top Movies Area Start -->
+<section class="filmoja-top-movies-area section_30">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filmoja-heading">
+                    <h2>Phim:<span> Sắp chiếu</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="top-movie-slider owl-carousel">
+                    {% for phim in phim_sap_chieu %}
+                    <div class="single-top-movie">
+                        <div class="top-movie-wrap">
+                            <div class="top-movie-img">
+                                <a href="{% url 'film_detail' phim.id %}">
+                                    <img src="{{ phim.thumbnail.url }}" alt="{{ phim.ten_phim }}" />
+                                </a>
+                            </div>
+                            <div class="thumb-hover">
+                                <a class="play-video" href="https://www.youtube.com/watch?v=TrK0Cp4btu4">
+                                    <i class="fa fa-play">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="fa fa-play">
+                                            <path d="M8 5v14l11-7z"/>
+                                        </svg>
+                                    </i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="top-movie-details">
+                            <h4><a href="{% url 'film_detail' phim.id %}">{{ phim.ten_phim }}</a></h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Top Movies Area End -->
+
+<!-- Top Movies Area Start -->
+
+
+
+<!-- Top Movies Area End -->
+<!-- Top Movies Area Start -->
+<section class="filmoja-top-movies-area section_30" style="background: #22272b;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="filmoja-heading">
+                    <h2>Phim hot :<span> Tháng 11</span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="fw-tabs movies ui-tabs ui-widget ui-widget-content ui-corner-all">
+                    <div id="Mon" aria-labelledby="ui-id-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel" aria-hidden="false" style="display: block;">
+                        <div class="row movie-tabs">
+                            {% for phim in random_movies %}
+                            <div class="col-md-2 col-sm-12">
+                                <a href="{% url 'film_detail' phim.id %}" title="{{ phim.ten_phim }}">
+                                    <img src="{{ phim.thumbnail.url }}" alt="{{ phim.ten_phim }}">
+                                </a>
+                            </div>
+                            <div class="col-md-10 col-sm-12">
+                                <header>
+                                    <h3 class="no-underline">{{ phim.ten_phim }} (T{{ phim.do_tuoi }})</h3>
+                                </header>
+                                <span class="title">
+                                    {% for the_loai in phim.the_loai.all %}
+                                        {{ the_loai.ten_the_loai }}
+                                        {% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </span>
+                                <div class="col-lg-12" style="padding-left:0 !important">
+                                    <p class="time">2D</p>&nbsp;<p class="time red">T{{ phim.do_tuoi }}</p>
+                                </div>
+                                <p class="desc">
+                                    <b>Đạo diễn: </b> {{ phim.dao_dien }}
+                                </p>
+                                <p class="desc">
+                                    <b>Diễn viên: </b> {{ phim.dien_vien }}
+                                </p>
+                                <p>
+                                    <b>Mô tả: </b> {{ phim.tom_tat }}
+                                </p>
+                                <div class="col-lg-12" style="padding-left:0 !important">
+                                    <a href="{% url 'film_detail' phim.id %}">
+                                        <p class="time red">&nbsp;<i class="fa fa-ticket"></i> &nbsp;Đặt vé&nbsp;&nbsp;</p>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Top Movies Area End -->
+<!-- News Area Start -->
+
+
+<!-- News Area End -->
+
+<script>
+    window.onload = function () {
+        var modal = getCookie("key");
+        if (modal != "") {
+
+        } else {
+            $.ajax({
+                url: "/Home/GetAdsImage",
+                type: "GET",
+                traditional: true,
+                dataType: "text",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    //alert(data);
+                    if (data != "" && data != null) {
+                        $("#adsImage").attr("src", data);
+                        $("#adsImageModal").modal('show');
+                        sessionStorage.setItem("key", "modal");
+                        return false;
+                    } else {
+
+                        return false;
+                    }
+                },
+                error: function () {
+                    return false;
+                }
+            });
+        }
+
+    }
+    function getCookie(cname) {
+        var ca = sessionStorage.getItem(cname);
+        if (ca == null || ca == "") {
+            return "";
+        }
+        else
+            return ca;
+    }
+</script>
+    <!-- Footer Start -->
+    
+<footer class="filmoja-footer-area">
+    <div class="footer-top-area section_70">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <a href="#"><img src="Content/img/footer_logo.png" alt="footer logo" /></a>
+                        
+                        <div class="footer-contact">
+                            <p>Support: <a href="#">support@starlight.vn</a></p>
+                            <p>Hotline: <a href="tell:1900 1722">1900 1722</a></p>
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h3>Chính sách</h3>
+                        <ul>
+                                    <li><a href="chinh-sach/dieu-khoan-chung-1.html"><i class="fa fa-angle-double-right"></i>Điều khoản chung</a></li>
+                                    <li><a href="chinh-sach/chinh-sach-thanh-toan-2.html"><i class="fa fa-angle-double-right"></i>Ch&#237;nh s&#225;ch thanh to&#225;n</a></li>
+                                    <li><a href="chinh-sach/chinh-sach-giao-nhan-3.html"><i class="fa fa-angle-double-right"></i>Ch&#237;nh S&#225;ch Giao Nhận</a></li>
+                                    <li><a href="chinh-sach/bao-mat-thong-tin-4.html"><i class="fa fa-angle-double-right"></i>Bảo Mật Th&#244;ng Tin</a></li>
+                                    <li><a href="chinh-sach/kiem-hang-doi-tra-hoan-tien-5.html"><i class="fa fa-angle-double-right"></i>Kiểm H&#224;ng, đổi trả/ho&#224;n tiền</a></li>
+                        </ul>
+                    </div>
+                </div>
+               
+                <div class="col-lg-4 col-sm-6">
+                    <div class="single-footer-widget">
+                        <h3>Download App</h3>
+                        <div class="footer-app-box">
+                            <p>Tải ngay ứng dụng đặt vé online cho dế yêu của bạn !</p>
+                            <ul class="apps-list">
+                                <li><a href="https://play.google.com/store/apps/details?id=com.kingprocompany.starlightcinemas"><img src="Content/img/app-1.jpg" alt="app image" /></a></li>
+                                <li><a href="https://apps.apple.com/us/app/starlight-cinemas/id1588865280"><img src="Content/img/app-2.jpg" alt="app image" /></a></li>
+                            </ul>
+                            <ul class="apps-list">
+                                <li><a href="http://online.gov.vn/Home/WebDetails/118483" target="_blank"><img alt="" title="" src="Content/img/congthuong.png"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h3 style="color:#fff">CÔNG TY CỔ PHẦN ENTERTAINMENT 2020</h3>
+            <p>
+                Giấy chứng nhận đăng kí doanh nghiệp công ty cổ phần: 0402021264 đăng ký lần đầu ngày 03/01/2020
+            </p>
+            <p>
+                Cơ quan cấp : Phòng Đăng ký kinh doanh - Sở kế hoạch và đầu tư Thành phố Đà Nẵng
+            </p>
+            <p>
+                Địa chỉ: Tầng 4, Tòa nhà Nguyễn Kim, 46 Điện Biên Phủ, TP. Đà Nẵng, Việt Nam
+            </p>
+            <p style="color:#fff">
+                Hotline (Đường dây nóng) : <a href="tel:19001722">19001722</a>
+            </p>
+        </div>
+    </div>
+    <div class="copyright-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright-box">
+                        <p>2019 © StarLight. All rights reserved - Design by <a href="https://kingpro.vn/">KingPro</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<section>
+    <div id="mobile-menu">
+        <ul>
+            <li><a class="" href="index.html" style="background-color:#2b2b31;"><i class="fa fa-home"></i><br />Trang Chủ</a></li>
+            <li><p onclick="toggleMBooking()" style="background-color: #2b2b31;"><i class="fa fa-ticket"></i><br /> Đặt V&#233;</p></li>
+            <li><a class="" href="lich-chieu.html" style="background-color: #2b2b31;"><i class="fa fa-film"></i><br /> Lịch Chiếu</a></li>
+            <li><a href="uu-dai.html" style="background-color: #2b2b31;"><i class="fa fa-gift"></i><br /> Ưu Đ&#227;i</a></li>
+        </ul>
+    </div>
+
+</section>
+<section>
+    <div class="mobile-book">
+        <select class="slMTheater" onchange="selectMServer(this)">
+            <option value="0">Rạp</option>
+        </select>
+        <select class="slMFilm" onchange="selectMFilm(this)">
+            <option value="0">Phim</option>
+        </select>
+        <select class="slMDate" onchange="selectMDate(this)">
+            <option value="0">Ng&#224;y chiếu</option>
+        </select>
+        <select class="slMTime" onchange="selectMTime(this)">
+            <option value="0">Suất chiếu</option>
+        </select>
+        <a id="btnMBooking" onclick="btnMBooking()">Mua V&#233; Ngay</a>
+    </div>
+</section>
+
+
+<script>
+    function logOutMenu() {
+        $.ajax({
+            url: "/MemberRegister/Logout",
+            type: "POST",
+            traditional: true,
+            datatype: "json",
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                //alert(result);
+                if (result === "true" || result === true) {
+                    location.href = "index.html";
+                } else {
+                }
+            },
+            error: function () {
+                return false;
+            }
+        });
+    }
+</script>
+<script>
+    function toggleMBooking() {
+        $(".mobile-book").toggleClass("show-mobile-book");
+    }
+</script>
+<!-- Load Facebook SDK for JavaScript -->
+
+    <div class="modal fade" id="adsImageModal" role="dialog" style="background: rgba(51, 51, 51, 0.46);">
+        <div class="modal-dialog" style="width:95%;max-width:95%;margin:100px auto;">
+            <!-- Modal content-->
+            <div class="modal-content" style="    max-width: 640px;margin: 0 auto;">
+                <div class="modal-body" style="padding:0">
+                    <img id="adsImage" style="    border: 3px solid #000;border-radius: 3px;width:100%" src="../www.starlight.vn/Areas/Admin/Content/Fileuploads/images/POSTER/z2950019928727_f1e225b7c12d6c9e9cd4af710d7e685f.html" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+<script src="{% static 'trangchu/Scripts/Style88a8' %}"></script>
+<script src="{% static 'trangchu/Scripts/js/film-script.js' %}"></script>
+
+    
+    
+   
+</body>
+
+<!-- Mirrored from starlight.vn/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Nov 2024 01:20:23 GMT -->
+</html>

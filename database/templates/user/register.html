@@ -1,0 +1,222 @@
+{% include "base/header.html" %}
+{% load static %}
+
+<script>
+    function openNav() {
+        document.getElementById("mobileMenu").style.width = "300px";
+    }
+
+    function closeNav() {
+        document.getElementById("mobileMenu").style.width = "0";
+    }
+</script>
+
+<!-- Main Header End -->
+
+<div class="sign section--bg" data-bg="{% static 'Content/img/section/section.jpg' %}" style="background: #e6e7e9; max-width: 100% !important; border-top: 1px solid;">
+    <div class="container register" style="max-width: 100% !important;">
+        <div class="row">
+            <div class="col-md-3 register-left">
+                <img src="{% static 'Content/img/logo-white.png' %}" alt="" />
+                <p>Đăng ký tài khoản thành viên và nhận ngay ưu đãi!</p>
+                <br>
+            </div>
+            <div class="col-md-9 register-right">
+                {% if messages %}
+                    <div class="alert alert-info">
+                        <ul>
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h3 class="register-heading">Thông tin tài khoản</h3>
+                        <form id="registerForm" method="POST">
+                            {% csrf_token %}
+                            <div class="row register-form">
+                                <div class="col-md-6">
+                                    <!-- Họ và tên -->
+                                    <div class="form-group">
+                                        {{ form.username.errors }}
+                                        <input type="text" class="form-control" id="id_username" name="username" placeholder="Tên đăng nhập" value="{{ form.username.value|default:'' }}">
+                                    </div>
+                                    <!-- Ngày sinh -->
+                                    <div class="form-group">
+                                        {{ form.ngay_sinh.errors }}
+                                        <input type="date" class="form-control" id="id_ngay_sinh" name="ngay_sinh" placeholder="Ngày sinh" value="{{ form.ngay_sinh.value|default:'' }}">
+                                    </div>
+                                    <!-- Điện thoại -->
+                                    <div class="form-group">
+                                        {{ form.sdt.errors }}
+                                        <input type="tel" class="form-control" id="id_sdt" name="sdt" placeholder="Điện thoại(*)" value="{{ form.sdt.value|default:'' }}" minlength="10" maxlength="10">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        {{ form.email.errors }}
+                                        <input type="email" class="form-control" id="id_email" name="email" placeholder="Email (*)" value="{{ form.email.value|default:'' }}">
+                                    </div>
+
+                                    <!-- Mật khẩu -->
+                                    <div class="form-group">
+                                        <label for="id_password">Mật khẩu</label>
+                                        <input type="password" class="form-control" id="id_password" name="password" placeholder="Mật khẩu" value="{{ form.password.value|default:'' }}">
+                                        {{ form.password.errors }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="id_password_confirm">Xác nhận mật khẩu</label>
+                                        <input type="password" class="form-control" id="id_password_confirm" name="password_confirm" placeholder="Xác nhận mật khẩu" value="{{ form.password_confirm.value|default:'' }}">
+                                        {{ form.password_confirm.errors }}
+                                    </div>
+                                    <!-- Giới tính -->
+                                    <div class="form-group">
+                                        {{ form.gioi_tinh.errors }}
+                                        <div class="maxl">
+                                            <label class="radio inline">
+                                                <input type="radio" id="id_gioi_tinh_nam" name="gioi_tinh" value="Nam" {% if form.gioi_tinh.value == 'Nam' %}checked{% endif %}>
+                                                <span>Nam</span>
+                                            </label>
+                                            <label class="radio inline">
+                                                <input type="radio" id="id_gioi_tinh_nu" name="gioi_tinh" value="Nu" {% if form.gioi_tinh.value == 'Nu' %}checked{% endif %}>
+                                                <span>Nữ</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- Submit Button -->
+                                    <input type="submit" class="btnRegister" value="Đăng ký">
+                                </div>
+                                <p style="color: #333;">Vui lòng nhập đầy đủ thông tin vào các trường có đánh dấu <b style="color: red;">(*)</b></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function register() {
+        $(".main-reloader").css("display", "block");
+        var fullName = $("#id_full_name").val();
+        var userName = $("#id_username").val();
+        var password = $("#id_password").val();
+        var rePassword = $("#id_password_confirm").val();
+        var address = $("#id_address").val();
+        var identifi = $("#id_identifi").val();
+        var phone = $("#id_sdt").val();
+        var email = $("#id_email").val();
+        var birthday = $("#id_ngay_sinh").val();
+        var gender = $("input[name='gioi_tinh']:checked").val();
+        var storeId = $("#id_store").val();
+        var isActive = false;
+
+        if (!userName || !password || !rePassword || !phone || !email || !birthday) {
+            alert("Vui lòng điền đầy đủ thông tin.");
+            return false;
+        }
+
+        var data = JSON.stringify({
+            UserName: userName,
+            Password: password,
+            RePassword: rePassword,
+            Address: address,
+            Identifi: identifi,
+            Phone: phone,
+            Email: email,
+            BirthDay: birthday,
+            Gender: gender,
+            FullName: fullName,
+            StoreId: storeId,
+            IsActive: isActive
+        });
+
+        $.ajax({
+            url: "/MemberRegister/Register",
+            type: "POST",
+            data: data,
+            traditional: true,
+            datatype: "json",
+            contentType: 'application/json; charset=utf-8',
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            success: function (result) {
+                if (result === "true" || result === true) {
+                    $.sweetModal({
+                        content: 'Đăng ký thành công. Vui lòng kiểm tra Email để xác nhận việc đăng ký của bạn. Và đăng nhập <a href="/dang-nhap.html">tại đây</a>',
+                        title: 'Thông báo',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK,
+                        buttons: {
+                            'OK': {
+                                classes: 'redB'
+                            }
+                        }
+                    }, function () { location.href = "dang-nhap.html"; });
+                } else {
+                    $.sweetModal({
+                        content: result,
+                        title: '',
+                        icon: $.sweetModal.ICON_WARNING,
+                        theme: $.sweetModal.THEME_DARK,
+                        buttons: {
+                            'OK': {
+                                classes: 'redB'
+                            }
+                        }
+                    });
+                    $(".main-reloader").css("display", "none");
+                }
+            },
+            error: function () {
+                $.sweetModal({
+                    content: 'Có lỗi xảy ra. Vui lòng thử lại.',
+                    title: 'Lỗi',
+                    icon: $.sweetModal.ICON_ERROR,
+                    theme: $.sweetModal.THEME_DARK,
+                    buttons: {
+                        'OK': {
+                            classes: 'redB'
+                        }
+                    }
+                });
+                $(".main-reloader").css("display", "none");
+            }
+        });
+    }
+</script>
+
+<!-- Footer Start -->
+{% include "base/footer.html" %}
+
+<script>
+    function logOutMenu() {
+        $.ajax({
+            url: "/MemberRegister/Logout",
+            type: "POST",
+            traditional: true,
+            datatype: "json",
+            contentType: 'application/json; charset=utf-8',
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            success: function (result) {
+                if (result === "true" || result === true) {
+                    location.href = "index.html";
+                }
+            },
+            error: function () {
+                return false;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

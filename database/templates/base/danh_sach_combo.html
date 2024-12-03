@@ -1,0 +1,28 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<h2>Danh sách Combo</h2>
+<table class="table-management">
+    <thead>
+        <tr>
+            <th>Tên Combo</th>
+            <th>Giá Combo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for combo in combos %}
+        <tr>
+            <td>{{ combo.ten_combo }}</td>
+            <td>{{ combo.gia_combo }}</td>
+            <td>
+                <a href="{% url 'sua_combo' combo.id %}">Sửa</a> |
+                <a href="{% url 'xoa_combo' combo.id %}">Xóa</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'them_combo' %}">Thêm Combo mới</a>
+{% endblock %}

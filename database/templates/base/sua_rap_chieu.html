@@ -1,0 +1,19 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<h2>Sửa rạp chiếu</h2>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+    <a href="{% url 'danh_sach_rap_chieu' %}" class="btn btn-secondary">Quay lại danh sách rạp chiếu</a>
+
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<h2>Sửa liên hệ: {{ form.instance.name }}</h2>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+
+    <div class="form-group">
+        {{ form.as_p }}
+    </div>
+    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+</form>
+<a href="{% url 'danh_sach_lien_he' %}" class="btn btn-secondary">Quay lại danh sách</a>
+{% endblock %}

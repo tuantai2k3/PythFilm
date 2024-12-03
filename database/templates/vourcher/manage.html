@@ -1,0 +1,31 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+<h2>Quản lý Voucher</h2>
+<table class="table-management">
+    <thead>
+        <tr>
+            <th>Mã Voucher</th>
+            <th>Loại Voucher</th>
+            <th>Giảm Giá</th>
+            <th>Ngày Bắt Đầu</th>
+            <th>Ngày Kết Thúc</th>
+            {% comment %} <th>Hành Động</th> {% endcomment %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for voucher in vouchers %}
+        <tr>
+            <td>{{ voucher.code }}</td>
+            <td>{{ voucher.get_voucher_type_display }}</td>
+            <td>{{ voucher.discount_value }} {{ voucher.get_discount_type_display }}</td>
+            <td>{{ voucher.start_date }}</td>
+            <td>{{ voucher.end_date }}</td>
+            {% comment %} <td><a href="{% url 'assignvoucher'%}">Cấp Voucher</a></td> {% endcomment %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'add_voucher' %}">Thêm Voucher Mới</a>
+
+{% endblock %}

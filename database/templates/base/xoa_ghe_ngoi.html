@@ -1,0 +1,18 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+
+<h2>Xóa ghế ngồi: {{ ghe.ten_ghe }}</h2>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <p>Bạn có chắc chắn muốn xóa ghế ngồi này?</p>
+    
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    
+    <a href="{% url 'danh_sach_ghe_ngoi' %}" class="btn btn-secondary">Quay lại danh sách ghế ngồi</a>
+</form>
+
+{% endblock %}

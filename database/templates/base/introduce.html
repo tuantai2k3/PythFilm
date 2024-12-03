@@ -1,0 +1,64 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+
+<style>
+    /* CSS trực tiếp trong template */
+    h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    p {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    ul {
+        margin-top: 10px;
+    }
+    li {
+        margin-bottom: 15px;
+    }
+</style>
+
+<h2>Hướng dẫn quản lý database hệ thống phim và vé</h2>
+<p>Hệ thống quản lý rạp chiếu phim của bạn đã được xây dựng với các bảng cơ bản để quản lý thông tin phim, suất chiếu, vé và các dịch vụ liên quan như combo và ghế ngồi. Dưới đây là hướng dẫn nhanh về cách quản lý database:</p>
+<ul>
+    <li><strong>1. Quản lý Combo</strong><br>
+    Mục đích: Quản lý các combo bán kèm vé như đồ ăn và nước uống.<br>
+    Cách sử dụng: Bạn có thể thêm, chỉnh sửa hoặc xóa các combo từ bảng Combo. Mỗi combo có tên và giá trị riêng.</li>
+
+    <li><strong>2. Quản lý Rạp Chiếu</strong><br>
+    Mục đích: Lưu trữ thông tin về các rạp chiếu, bao gồm tên, địa chỉ và thông tin liên lạc.<br>
+    Cách sử dụng: Bạn có thể tạo mới hoặc sửa thông tin rạp chiếu thông qua bảng RapChieu.</li>
+
+    <li><strong>3. Quản lý Định Dạng Phim</strong><br>
+    Mục đích: Định dạng các suất chiếu phim như 2D, 3D, IMAX, v.v.<br>
+    Cách sử dụng: Tạo mới hoặc cập nhật các định dạng phim trong bảng DinhDangPhim.</li>
+
+    <li><strong>4. Quản lý Thể Loại Phim</strong><br>
+    Mục đích: Lưu trữ thông tin các thể loại phim như hành động, lãng mạn, kinh dị, v.v.<br>
+    Cách sử dụng: Thêm, sửa hoặc xóa các thể loại phim trong bảng TheLoai.</li>
+
+    <li><strong>5. Quản lý Phim</strong><br>
+    Mục đích: Lưu trữ thông tin chi tiết về các bộ phim đang chiếu.<br>
+    Cách sử dụng: Bạn có thể tạo phim mới, gán thể loại, thêm đạo diễn, diễn viên, mô tả và hình ảnh thumbnail.</li>
+
+    <li><strong>6. Quản lý Suất Chiếu</strong><br>
+    Mục đích: Quản lý lịch chiếu phim tại các rạp.<br>
+    Cách sử dụng: Thêm các suất chiếu mới, chỉ định phim, định dạng phim, thời gian và rạp chiếu.</li>
+
+    <li><strong>7. Quản lý Ghế Ngồi</strong><br>
+    Mục đích: Quản lý thông tin ghế ngồi trong các rạp chiếu.<br>
+    Cách sử dụng: Thêm ghế mới, chỉ định loại ghế (VIP, thường) và giá vé cho từng loại ghế.</li>
+
+    <li><strong>8. Quản lý Người Dùng</strong><br>
+    Mục đích: Lưu trữ thông tin người dùng, giúp họ quản lý tài khoản và mua vé.<br>
+    Cách sử dụng: Bạn có thể thêm hoặc chỉnh sửa thông tin người dùng trong bảng NguoiDung.</li>
+
+    <li><strong>9. Quản lý Vé</strong><br>
+    Mục đích: Lưu trữ thông tin vé đã bán, bao gồm phim, suất chiếu, ghế ngồi và người mua.<br>
+    Cách sử dụng: Mỗi khi người dùng mua vé, bạn có thể tạo mới vé trong bảng Ve, tự động điền thông tin về loại ghế, giá vé và thông tin người dùng.</li>
+</ul>
+
+{% endblock %}

@@ -1,0 +1,188 @@
+{% load static %}
+{% include "base/header.html" %}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đoán Tên Phim</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            color: white;
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            padding: 20px 0;
+        }
+
+        .game-container {
+            max-width: 900px;
+            margin: 50px auto; /* Căn giữa container */
+            padding: 40px;
+            background: linear-gradient(145deg, #2a2a2a, #121212); /* Tạo hiệu ứng chuyển màu đẹp mắt */
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Thêm bóng mờ cho phần tử */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .game-container:hover {
+            transform: translateY(-5px); /* Tạo hiệu ứng nhấc lên khi hover */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7); /* Tăng cường hiệu ứng bóng mờ */
+        }
+        
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #fbbf24; /* Màu vàng cho tiêu đề */
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5); /* Thêm hiệu ứng đổ bóng cho tiêu đề */
+        }
+        
+        .stats {
+            background-color: rgba(255, 255, 255, 0.1); /* Màu nền mờ cho khối thông tin */
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 18px;
+            color: #bdbdbd; /* Màu chữ sáng hơn cho phần thông tin */
+        }
+        
+        .voucher-info {
+            background-color: rgba(255, 255, 255, 0.2); /* Nền mờ cho phần voucher */
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+        
+        .voucher-info h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fbbf24; /* Màu vàng cho phần voucher */
+            margin-bottom: 15px;
+            text-transform: uppercase; /* Đưa chữ lên tất cả để nổi bật */
+        }
+        
+        .voucher-info p {
+            font-size: 20px;
+            color: #bdbdbd;
+        }
+        
+        .voucher-info .voucher-code {
+            font-size: 22px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #333;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 15px;
+            letter-spacing: 2px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .voucher-info .voucher-code:hover {
+            background-color: #fbbf24;
+            color: #121212;
+        }
+        
+        .button {
+            padding: 16px 35px;
+            margin-top: 35px;
+            background-color: #2563eb;
+            color: white;
+            font-size: 18px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+        
+        .button:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-4px);
+        }
+        
+        .game-results-button {
+            background-color: #10b981;
+        }
+        
+        .game-results-button:hover {
+            background-color: #065f46;
+        }
+        
+        .retry-button {
+            background-color: #f59e0b;
+        }
+        
+        .retry-button:hover {
+            background-color: #c2410c;
+        }
+        
+        .flex {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .flex a {
+            transition: transform 0.3s ease;
+        }
+        
+        .flex a:hover {
+            transform: scale(1.05);
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h1>Chúc Mừng Bạn Đã Nhận Thưởng!</h1>
+
+        <!-- Thông tin điểm và thưởng -->
+        <div class="stats">
+            <p>{{ reward_message }}</p>
+        </div>
+
+        <!-- Hiển thị voucher nếu có -->
+        {% if voucher_type %}
+            <div class="voucher-info">
+                <h2>Voucher: 
+                    {% if voucher_type == 'combo' %}
+                        Combo bắp và nước miễn phí + giảm 10%
+                    {% elif voucher_type == 'drink' %}
+                        Voucher nước miễn phí
+                    {% elif voucher_type == 'popcorn' %}
+                        Voucher bắp miễn phí
+                    {% elif voucher_type == 'discount_20' %}
+                        Voucher giảm giá 20%
+                    {% elif voucher_type == 'discount_10' %}
+                        Voucher giảm giá 10%
+                    {% endif %}
+                </h2>
+                <p> {{ voucher_code }}</p>
+            </div>
+        {% else %}
+            <p>Bạn chưa đủ điểm để nhận thưởng! Hãy quay lại và chơi để tích lũy điểm.</p>
+        {% endif %}
+
+        <!-- Nút điều hướng -->
+        <div class="flex">
+            <a href="{% url 'game_page' %}" class="button bg-blue-600">Quay lại trò chơi</a>
+            <a href="{% url 'game_results' %}" class="button game-results-button">Xem lịch sử</a>
+        </div>
+    </div>
+</body>
+
+</html>

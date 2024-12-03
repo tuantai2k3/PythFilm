@@ -1,0 +1,27 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách người dùng</h2>
+<table class="table-management">
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Số điện thoại</th>
+        <th>Hành động</th>
+    </tr>
+    {% for nguoi_dung in ds_nguoi_dung %}
+    <tr>
+        <td>{{ nguoi_dung.username }}</td>
+        <td>{{ nguoi_dung.email }}</td>
+        <td>{{ nguoi_dung.sdt }}</td>
+        <td>
+            <a href="{% url 'sua_nguoi_dung' nguoi_dung.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_nguoi_dung' nguoi_dung.id %}">Xóa</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'them_nguoi_dung' %}">Thêm người dùng mới</a>
+{% endblock %}

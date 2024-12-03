@@ -1,0 +1,28 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+<h2>Danh sách liên hệ</h2>
+<table class="table-management">
+    <tr>
+        <th>Họ và Tên</th>
+        <th>Email</th>
+        <th>Số Điện Thoại</th>
+        <th>Message</th>
+        <th>Hành động</th>
+    </tr>
+    {% for contact in contacts %}
+    <tr>
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.email }}</td>
+        <td>{{ contact.subject }}</td>
+        <td>{{ contact.message }}</td>
+        <td>
+            <a href="{% url 'sua_lien_he' contact.id %}">Sửa</a> | 
+            <a href="{% url 'xoa_lien_he' contact.id %}">Xóa</a> | 
+            
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    <h1 class="mb-4">Thêm Bình Luận</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Lưu</button>
+        <a href="{% url 'danh_sach_binh_luan' %}" class="btn btn-secondary">Quay lại</a>
+    </form>
+{% endblock %}

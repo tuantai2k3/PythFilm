@@ -1,0 +1,10 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+<h2>Thêm Voucher Mới</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Thêm Voucher</button>
+</form>
+{% endblock%}

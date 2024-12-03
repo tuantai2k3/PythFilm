@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="mini-game-page">
+        <h1>Tổng hợp Mini Game</h1>
+        
+        <div class="mini-games-list">
+            {% for game in games %}
+                <div class="mini-game-item" style="border: 1px solid #ccc; border-radius: 10px; padding: 15px; margin-bottom: 20px; background-color: #222;">
+                    <h2>{{ game.name }}</h2>
+                    <p>{{ game.description|truncatewords:20 }}</p>  <!-- Hiển thị mô tả ngắn gọn -->
+                    
+                    <!-- Card or Button to Play -->
+                    <a href="{% url 'guess_movie' game.id %}" style="display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px;">
+                        Chơi Ngay
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

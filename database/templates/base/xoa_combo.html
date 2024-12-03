@@ -1,0 +1,14 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    <h2>Xóa Combo</h2>
+
+    <p>Bạn có chắc chắn muốn xóa combo "<strong>{{ combo.ten_combo }}</strong>" không?</p>
+
+    <form method="POST" class="form-management">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Xóa</button>
+    </form>
+
+    <a href="{% url 'danh_sach_combo' %}" class="btn btn-secondary mt-3">Quay lại danh sách Combo</a>
+{% endblock %}

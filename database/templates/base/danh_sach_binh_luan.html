@@ -1,0 +1,34 @@
+{% extends 'base/quan_ly.html' %}
+
+{% block content %}
+    <h1 class="mb-4">Danh Sách Bình Luận</h1>
+    
+
+    
+    <table class="table-management">
+        <thead class="thead-dark">
+            <tr>
+                <th>Phim</th>
+                <th>User</th>
+                <th>Rating</th>
+                <th>Nội Dung</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for binh_luan in binh_luans %}
+            <tr>
+                <td>{{ binh_luan.phim.ten_phim }}</td>
+                <td>{{ binh_luan.user_binh_luan.username }}</td>
+                <td>{{ binh_luan.rating }}</td>
+                <td>{{ binh_luan.noi_dung }}</td>
+                <td>
+                    <a href="{% url 'sua_binh_luan' binh_luan.id %}" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="{% url 'xoa_binh_luan' binh_luan.id %}" class="btn btn-danger btn-sm">Xóa</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'them_binh_luan' %}" class="btn btn-primary mb-3">Thêm Bình Luận</a>
+{% endblock %}

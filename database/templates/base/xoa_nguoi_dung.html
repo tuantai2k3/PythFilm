@@ -1,0 +1,18 @@
+{% extends 'base/quan_ly.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'style.css' %}" rel="stylesheet">
+
+<h2>Xóa người dùng: {{ nguoi_dung.username }}</h2>
+
+<form method="POST" class="custom-form">
+    {% csrf_token %}
+    
+    <p>Bạn có chắc chắn muốn xóa người dùng này?</p>
+    
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    
+    <a href="{% url 'danh_sach_nguoi_dung' %}" class="btn btn-secondary">Quay lại danh sách người dùng</a>
+</form>
+
+{% endblock %}
